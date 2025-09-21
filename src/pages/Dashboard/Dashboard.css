@@ -1,0 +1,22 @@
+.dashboard{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+
+    .dashboard-hero-container{
+        grid-column: 2/-1;
+    }
+
+    .dashbord-sidebar-container{
+        grid-row: 1/-6;
+    }
+
+    .dashboard-transaction{
+        grid-column: 2/-1;
+    }
+}
+
+
+
+
+

@@ -1,0 +1,148 @@
+.navbar{
+    margin-top: 51px;
+    flex-direction: row;
+    /* gap: 20px; */
+    padding: 0 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.navbar-left{
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    font-size: 28.79px;
+}
+.navbar-left img{
+    width: 50px;
+    height: 50px;
+}
+
+.navbar-right {
+    display: inline-flex;
+}
+.navbar-right img{
+    cursor: pointer;
+    
+}
+
+.navbar-right ul li{
+    list-style: none;
+    display: inline;
+    font-size: 18px;
+    margin-right: 13px;
+    cursor: pointer;
+    padding-bottom: 4px;
+
+}
+.underline{
+    border-bottom: 1.5px solid transparent;
+    transition: border-bottom 0.5s ease;
+}
+
+.underline:hover{
+    border-bottom: 1.5px solid var(--orange);
+    color: var(--orange);
+    /* transition: 0.2s; */
+}
+
+/* .navbar-right a{
+} */
+
+.navbar-right .btn{
+    padding-left: 56px;
+    padding-right: 56px;
+    transition: background-color 0.5s ease;
+}
+
+.navbar-right button:hover{
+    background-color: var(--orange-hover);
+    /* transition: 0.5s; */
+}
+.navbar-right button:hover.btn{
+    background-color: var(--orange);
+    color: var(--grey-black);
+    /* transition: 0.5s; */
+}
+
+.hamburger{
+    /* display: none; */
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    top: 0;
+    width: 37px;
+    height: auto;
+    margin-right: 25px;
+    margin-top: 10px;
+    display: none;
+    transition: 0.5s;
+}
+
+.hamburger:active{
+    width: 34px;
+}
+
+.hamburger-menu{
+    position: fixed;
+    height: 100%;
+    right: 0%;
+    top: 0;
+    padding: 110px 30px;
+    font-size: 18px;
+    background: rgba(6, 6, 6, 0.555);
+    transition: 1s ease;
+
+}
+
+.hamburger-menu li{
+    padding: 8px 0;
+}
+
+.hamburger-menu li:hover{
+    color: var(--orange);
+    cursor: pointer;
+}
+
+.hide{
+    /* display: none; */
+    transform: translateX(300px);
+}
+
+
+
+/* ---Media Queries--- */
+@media (min-width: 900px) {
+    .hamburger-menu{
+        display: none;
+    }
+}
+
+
+@media (max-width: 900px) {
+    .navbar-right ul{
+        display: none;
+
+    }
+    .hamburger{
+        display: block;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar{
+        padding: 0 20px;
+    }
+    .navbar-left{
+        gap: 10px;
+        font-size: 25px;
+    }
+    .navbar-left img{
+        width: 38px;
+        height: 38px;
+    }
+    
+}

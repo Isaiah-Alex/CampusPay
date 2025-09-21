@@ -1,0 +1,82 @@
+.dashboard-sidebar {
+  height: 100vh;
+  background: #0f0f0f;
+  color: var(--grey-middle);
+  font-size: 20px;
+  font-weight: 300;
+  padding: 100px 36px 0 66px;
+  /* height: 100%; */
+  max-width: 310px;
+  /* position: fixed; */
+    button{
+        width: 205px;
+        margin-top: 60px;
+        /* transition: background-color 0.3s ease; */
+        
+        &:hover{
+            background-color: var(--orange-hover);
+        }
+        
+    }
+  img{
+    cursor: pointer;
+    height: 50px;
+    width: auto;
+    border: 2px solid var(--orange);
+    border-radius: 50%;
+  }
+
+
+
+  /* list item nesting ---- */
+
+  
+    ul{
+
+        margin-top: 60px;
+
+        span{
+            display: block;
+            height: 1px;
+            width: 100%;
+            background: var(--grey-dark);
+        }
+        
+
+        
+
+        li{
+            list-style: none;
+            margin: 16px 0 16px 0;
+            width: fit-content;
+            padding-left: 0;
+
+            &:nth-child(1){
+            color: var(--orange);
+        }
+
+            &:hover{
+                cursor: pointer;
+                color: var(--grey-light);
+            }
+            /* background: red; */
+        }
+    }
+    .logout{
+        margin-top: 8px;
+    }
+
+    .connectWallet{
+
+        transition: background-color 0.3s ease;
+            &:hover{
+                color: var(--grey-dark);
+                background-color: var(--orange);
+            }
+        }
+    }
+
+
+
+
+

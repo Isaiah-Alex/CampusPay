@@ -1,0 +1,154 @@
+.hero-dashboard{
+    background: var(--dark-gradient);
+    z-index: 1;
+    position: relative;
+    padding: 30px 66px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+
+    h2{
+        font-size: 50px;
+        font-weight: 400;
+        color: var(--grey-light);
+        font-style: italic;
+
+        span{
+            color: var(--orange);
+        }
+        
+
+    }
+
+/* ------balance card ------ */
+
+
+    .balance-display{
+        display: flex;
+        justify-content: space-between;
+        width: 870px;
+        height: 250px;
+        background: var(--grey-black);
+        border-radius: 35px;
+        padding: 40px 80px;
+
+        .left-balance-display{
+            display: flex;
+            flex-direction: column;
+            row-gap: 28px;
+            justify-content: space-between;
+            padding: 10px 0;
+
+            .avaliable-balance{
+                display: flex;
+                align-items: center;
+                column-gap: 10px;
+                overflow: hidden;
+
+                img:nth-last-of-type(3){
+                    height: 26px;
+                }
+                img:nth-last-of-type(2){
+                    cursor: pointer;
+                }
+                img:nth-last-of-type(1){
+                    cursor: pointer;
+                    display: none;
+                }
+
+                p{
+                    font-size: 18px;
+                    color: var(--grey-middle);
+                }
+
+            }
+
+            .balance{
+                display: flex;
+                align-items: center;
+
+                h1{
+                    font-size: 60px;
+                    font-weight: 500;
+                    color: var(--grey-light);
+                }
+            }
+        }
+
+        .right-balance-display{
+            display: flex;
+            flex-direction: column;
+            row-gap: 28px;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 10px 0;
+            /* background-color: red; */
+
+            button{
+                width: 200px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                column-gap: 10px;
+                border-radius: 70px;
+                font-size: 16px;
+
+                span{
+                    font-size: 24px;
+                }
+
+                &:hover{
+                    background-color: var(--orange-hover);
+                }
+            }
+
+            .transaction-history{
+                display: flex;
+                align-items: center;
+                column-gap: 10px;
+                cursor: pointer;
+
+                p{
+                    color: var(--grey-middle);
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+
+    /* ---end of balance card ---  */
+
+    .send-receive-withdraw{
+        border-radius: 30px;
+        background: var(--grey-black);
+        margin-top: 30px;
+        padding: 30px 64px;
+        width: 870px;
+        display: flex;
+        justify-content: center;
+        column-gap: 40px;
+        margin-bottom: 20px;
+        
+        button{
+            border-radius: 15px;
+            width: 221px;
+            height: 66px;
+            font-size: 16px;
+
+            &:hover{
+                background-color: var(--orange-hover);
+            }
+        }
+    }
+    .dashboard-texture{
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        opacity: 40%;
+    }
+
+
+
+}

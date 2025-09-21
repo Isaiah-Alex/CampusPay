@@ -1,0 +1,24 @@
+:root {
+
+    /* colors */
+
+  --orange: #F79122;
+  --red: #DD2F27;
+  --ight-yellow : #FEC51D;
+  --grey-black: #1A1A1A;
+  --grey-white: #FFFCF4;
+  --grey-dark: #252525;
+  --grey-light: #BEBCB6;
+  --grey-placeholder: #434241;
+  --grey-middle: #686765;
+  --orange-hover: #FFA644;
+   --dark-gradient: linear-gradient(180deg, #1A1A1A, #0E0E0E);
+
+/* font sizes */
+
+  --font-nav: 20px;
+  --font-btn: 14px;
+  --font-heading: 52px;
+
+  
+}
