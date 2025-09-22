@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ConnectWallet.css";
 import wallet from "../../assets/wallet-illustration.svg";
 import wallet_icon from "../../assets/wallet-icon.svg";
 import vector from "../../assets/Vector.svg";
 import { connectWallet } from "../../wallet";
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 const ConnectWallet = () => {
   // state variables
   const [account, setAccount] = useState(null);
   const [balance, setBalance] = useState(null);
+
+  //  Load saved wallet from localStorage on mount
+  useEffect(() => {
+    const savedAccount = localStorage.getItem("account");
+    const savedBalance = localStorage.getItem("balance");
+
+    if (savedAccount && savedBalance) {
+      setAccount(savedAccount);
+      setBalance(savedBalance);
+    }
+  }, []);
 
   // handle wallet connection
   const handleConnect = async () => {
@@ -17,6 +28,10 @@ const ConnectWallet = () => {
       const { account, balance } = await connectWallet();
       setAccount(account);
       setBalance(balance);
+
+      //  Save to localStorage
+      localStorage.setItem("account", account);
+      localStorage.setItem("balance", balance);
     } catch (err) {
       alert(err.message);
     }
@@ -26,6 +41,10 @@ const ConnectWallet = () => {
   const handleDisconnect = () => {
     setAccount(null);
     setBalance(null);
+
+    // Remove from localStorage
+    localStorage.removeItem("account");
+    localStorage.removeItem("balance");
   };
 
   return (
@@ -46,7 +65,8 @@ const ConnectWallet = () => {
           {account ? (
             <p>
               <strong>Address:</strong> {account} <br />
-              <strong>Balance:</strong> <span style={{color: 'var(--orange)'}} >{balance} ETH</span>
+              <strong>Balance:</strong>{" "}
+              <span style={{ color: "var(--orange)" }}>{balance} ETH</span>
             </p>
           ) : (
             <p>Kindly connect your wallet to your account</p>
@@ -63,8 +83,11 @@ const ConnectWallet = () => {
         </div>
 
         {/* link to dashboard */}
-        <Link to={'/dashboard'} style={{textDecoration: 'none', color: 'var(--white)'}} >  
-        <p className="back-to-dashboard"> Back to Dadhboard</p>
+        <Link
+          to={"/dashboard"}
+          style={{ textDecoration: "none", color: "var(--white)" }}
+        >
+          <p className="back-to-dashboard"> Back to Dashboard</p>
         </Link>
       </div>
 
