@@ -4,14 +4,19 @@ import wallet from "../../assets/wallet-illustration.svg";
 import wallet_icon from "../../assets/wallet-icon.svg";
 import vector from "../../assets/Vector.svg";
 import { connectWallet } from "../../wallet";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import Loader from "../../components/Loader";
 
 const ConnectWallet = () => {
   // state variables
   const [account, setAccount] = useState(null);
   const [balance, setBalance] = useState(null);
 
-  //  Load saved wallet from localStorage on mount
+  // loading state
+  const [loading, setLoading] = useState(true);
+
+  // Load saved wallet from localStorage on mount
   useEffect(() => {
     const savedAccount = localStorage.getItem("account");
     const savedBalance = localStorage.getItem("balance");
@@ -20,20 +25,25 @@ const ConnectWallet = () => {
       setAccount(savedAccount);
       setBalance(savedBalance);
     }
+
+    setLoading(false); // Stop loading after checking localStorage
   }, []);
 
-  // handle wallet connection
+  // handle wallet connection to metaMask
   const handleConnect = async () => {
     try {
+      setLoading(true);
       const { account, balance } = await connectWallet();
       setAccount(account);
       setBalance(balance);
 
-      //  Save to localStorage
+      // Save to localStorage
       localStorage.setItem("account", account);
       localStorage.setItem("balance", balance);
     } catch (err) {
       alert(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,6 +56,11 @@ const ConnectWallet = () => {
     localStorage.removeItem("account");
     localStorage.removeItem("balance");
   };
+
+  // Show loader while checking storage
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="connect-wallet-container">
@@ -61,7 +76,7 @@ const ConnectWallet = () => {
             </h1>
           )}
 
-          {/* ✅ Show wallet details */}
+          {/* Show wallet details */}
           {account ? (
             <p>
               <strong>Address:</strong> {account} <br />
