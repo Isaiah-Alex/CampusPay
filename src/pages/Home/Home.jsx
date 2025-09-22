@@ -14,8 +14,12 @@ import Footer from '../../components/Footer/Footer'
 const Home = () => {
   return (
     <div className='home'>
+      <div className="navbar-container">
       <Navbar/>
+      </div>
+        <div className="hero-container">
       <Hero/>
+      </div>
       <Title  title={'How it Works'} />
       <div className="home-cards">
         <Card description={'Register/ Connect Wallet'} icon={Register_icon}/>

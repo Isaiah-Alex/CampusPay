@@ -10,5 +10,22 @@
     
 }
 
+.home{
+    position: relative;
+}
+
+.hero-container{
+    background: var(--dark-gradient);
+    margin-top: 80px;
+}
+
+.navbar-container{
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+    background: #191919e6;
+    padding-bottom: 30px;
+}
+
 /*-------------media queries*---------*/
 
