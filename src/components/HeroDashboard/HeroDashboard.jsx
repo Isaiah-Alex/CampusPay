@@ -17,7 +17,7 @@ import { transfer } from '../../services/transfer'
 
 const HeroDashboard = () => {
   const [name, setName] = useState('')
-  const [balance, setBalance] = useState(1000)
+  const [balance, setBalance] = useState(100000000)
   const [amount, setAmount] = useState('')
   const [receiverUid, setReceiverUid] = useState('')
 
@@ -87,6 +87,7 @@ const HeroDashboard = () => {
   }
 
   const handleTransfer = async () => {
+    
     try {
       await transfer(auth.currentUser.uid, receiverUid, Number(amount))
       setAmount('')
@@ -98,7 +99,7 @@ const HeroDashboard = () => {
 
   return (
     <div className='hero-dashboard'>
-      <h2>Welcome, <span>{name || 'loading...'}!</span></h2>
+      <h2>Welcome, <span>{name || ''}</span></h2>
 
       <div className="balance-display">
         <div className="left-balance-display">
@@ -137,7 +138,7 @@ const HeroDashboard = () => {
       </div>
 
       {/* Simple inputs for testing deposit/transfer */}
-      <div style={{ marginTop: "20px" }}>
+      <div className="test-inputs"  >
         <input
           type="number"
           placeholder="Amount"

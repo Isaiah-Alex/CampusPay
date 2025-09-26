@@ -32,6 +32,7 @@ const register = async (name, email, password) => {
       name,
       authProvider: "local",
       email,
+      balance: 0, // Initial balance
     });
   } catch (error) {
     console.error(error);

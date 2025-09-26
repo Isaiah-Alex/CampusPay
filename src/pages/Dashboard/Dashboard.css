@@ -9,6 +9,7 @@
 
     .dashbord-sidebar-container{
         grid-row: 1/-6;
+        position: fixed;
     }
 
     .dashboard-transaction{

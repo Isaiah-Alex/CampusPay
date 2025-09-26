@@ -15,6 +15,8 @@ const DashboardSidebar = () => {
             <span></span>
             <li>Notification</li>
             <span></span>
+            <li>KYC</li>
+            <span></span>
             <li>Settings</li>
         </ul>
         <Link to={'/connect-wallet'}>

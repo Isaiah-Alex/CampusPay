@@ -13,8 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-
-
+  const [isStudent, setIsStudent] = useState(true);
 
   //loading state
   const [loading, setLoading] = useState(false);
@@ -81,7 +80,7 @@ return (
           <form>
             {isCreateAccount && (
               <>
-                <label htmlFor="username">User Name</label>
+                <label htmlFor="username">{isStudent ? 'Username' : 'Business Name'}</label>
                 <input
                   type="text"
                   placeholder="Isaiah Alex"
@@ -92,23 +91,37 @@ return (
               </>
             )}
 
-            <label htmlFor="email">Email</label>
+            { !isStudent &&(<><label htmlFor="email">Email</label>
             <input
               type="email"
               placeholder="example@gmail.com"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-            />
+            />  </>)}
 
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+
+            {isStudent && (
+              <>
+                <label htmlFor="password">Mat Number</label>
+                <input
+                  type="text"
+                  placeholder="Enter your Mat Number"
+                  required
+                  // value={confirmPassword}
+                  // onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </>
+            )}
+
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
 
             {isCreateAccount && (
               <>
@@ -151,6 +164,29 @@ return (
                 {isCreateAccount ? "Login" : "Register"}
               </span>
             </p>
+            {!isStudent && (
+              <p style={{color: 'var(--grey-middle)',
+                        paddingTop: '20px'
+              }} className='have-account'
+             >Are you a student?&nbsp;
+             <span onClick={()=> {setIsStudent(true)}}
+             style={{borderBottom: '1.5px solid var(--grey-middle)',
+               color: 'var(--grey-middle)'}}
+             >Click here</span></p>
+            )}
+
+            {isStudent && (
+              <p style={{color: 'var(--grey-middle)',
+                        paddingTop: '20px'
+                        
+              }} className='have-account'
+             >Are you a vendor?&nbsp;
+             <span onClick={()=> {setIsStudent(false)}}
+             style={{borderBottom: '1.5px solid var(--grey-middle)',
+               color: 'var(--grey-middle)'                  
+              }}
+             >Click here</span></p>
+            )}
           </form>
         </div>
       </div>
