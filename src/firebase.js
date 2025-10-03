@@ -5,7 +5,11 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  setDoc
+} from "firebase/firestore";
 import { toast } from "react-toastify";
 
 // Use environment variables (Vite requires VITE_ prefix)
@@ -23,16 +27,21 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const register = async (name, email, password) => {
+// Register Student
+const registerStudent = async (name, matNo, password) => {
   try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
+    const fakeEmail = `${matNo}@gmail.com`; 
+    const res = await createUserWithEmailAndPassword(auth, fakeEmail, password);
     const user = res.user;
-    await addDoc(collection(db, "user"), {
+
+    await setDoc(doc(db, "user", user.uid), {
       uid: user.uid,
       name,
-      authProvider: "local",
-      email,
-      balance: 0, // Initial balance
+      email: fakeEmail,
+      role: "student",
+      accountNo: matNo,   // ✅ account number = mat number
+      balance: 1000000000,
+      createdAt: new Date()
     });
   } catch (error) {
     console.error(error);
@@ -40,7 +49,47 @@ const register = async (name, email, password) => {
   }
 };
 
-const login = async (email, password) => {
+// Register Vendor
+const registerVendor = async (name, email, password) => {
+  try {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    const user = res.user;
+
+    // generate vendor account number
+    const prefix = 'VND';
+    const number = Math.floor(100000 + Math.random() * 900000);
+    const year = new Date().getFullYear();
+    const yearSum = year.toString().split('').reduce((acc, d) => acc + Number(d), 0);
+    const accountNo = `${prefix}${number}${yearSum}`;
+
+    await setDoc(doc(db, "user", user.uid), {
+      uid: user.uid,
+      name,
+      email,
+      role: "vendor",
+      accountNo,  // ✅ save generated account number
+      balance: 0,
+      createdAt: new Date()
+    });
+  } catch (error) {
+    console.error(error);
+    toast.error(error.code.split("/")[1].split("-").join(" "));
+  }
+};
+
+// Login Student
+const loginStudent = async (matNo, password) => {
+  try {
+    const fakeEmail = `${matNo}@gmail.com`; // convert mat number to email
+    await signInWithEmailAndPassword(auth, fakeEmail, password);
+  } catch (error) {
+    console.error(error);
+    toast.error(error.code.split("/")[1].split("-").join(" "));
+  }
+};
+
+// Login Vendor
+const loginVendor = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (error) {
@@ -49,8 +98,9 @@ const login = async (email, password) => {
   }
 };
 
+// Logout
 const logout = () => {
   signOut(auth);
 };
 
-export { auth, db, register, login, logout };
+export { auth, db, registerStudent, registerVendor, loginStudent, loginVendor, logout };

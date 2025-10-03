@@ -1,11 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { createContext, useEffect, useRef, useState } from 'react'
 import './Login.css'
 import vector from '../../assets/Vector.svg'
 import gradient_logo from '../../assets/Logo-Gradient.svg'
-import {login, register} from '../../firebase'
+import {registerStudent, registerVendor, loginStudent, loginVendor} from '../../firebase'
 import Loader from '../../components/Loader'
+import { useAuth } from '../../Contexts/AuthContex'
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase";
 
 const Login = () => {
+
+  //global context here
+  const {setAccountNo} = useAuth();
+
+
+
 
   const [isCreateAccount, setIsCreateAccount] = useState(null);
   const [name, setName] = useState('');
@@ -14,6 +23,26 @@ const Login = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [isStudent, setIsStudent] = useState(true);
+  const [matNo, setMatNo] = useState('');
+
+  //setting the account number
+  const ACCOUNT_NUMBER  = () => {
+    if (isStudent){
+      setAccountNo(matNo);
+    } else{
+      const prefix = 'VND';
+  
+    // Random 6-digit number
+    const number = Math.floor(100000 + Math.random() * 900000);
+
+    // Current year sum
+    const year = new Date().getFullYear();
+    const yearSum = year.toString().split('').reduce((acc, d) => acc + Number(d), 0);
+
+    setAccountNo(`${prefix}${number}${yearSum}`);
+    }
+  }
+
 
   //loading state
   const [loading, setLoading] = useState(false);
@@ -32,23 +61,50 @@ const Login = () => {
   }; 
 
 
-  const user_auth = async (e) => {
-    e.preventDefault();
-    setLoading(true); //for the loader spinner to kick off
-    setError(""); //clear previous errors  
+const user_auth = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError(""); 
 
-    if (!isCreateAccount) {
-      await login(email, password);
-    }else{
-      if (password !== confirmPassword){
-        setError("Passwords do not match!");
-        setLoading(false); //stop the loader spinner
-        return; //stop execution if mismatch in password
+  try {
+    if (isStudent) {
+      if (!isCreateAccount) {
+        await loginStudent(matNo, password);
+      } else {
+        if (password !== confirmPassword) {
+          setError("Passwords do not match!");
+          return;
+        }
+        await registerStudent(name, matNo, password);
       }
-      await register(name, email, password);
+    } else {
+      if (!isCreateAccount) {
+        await loginVendor(email, password);
+      } else {
+        if (password !== confirmPassword) {
+          setError("Passwords do not match!");
+          return;
+        }
+        await registerVendor(name, email, password);
+      }
+
     }
-    setLoading(false); //stop the loader spinner
+
+  // ✅ Fetch account number from Firestore
+  const user = auth.currentUser;
+  if (user) {
+    const snap = await getDoc(doc(db, "user", user.uid));
+    if (snap.exists()) {
+      setAccountNo(snap.data().accountNo);
+    }
   }
+
+  } catch (err) {
+    setError(err.message);
+  } finally {
+    setLoading(false);
+  }
+};
 
 
 return (
@@ -77,7 +133,7 @@ return (
         <div className="create-account">
           <h3>{isCreateAccount ? 'Create Account' : 'Login'}</h3>
 
-          <form>
+          <form onSubmit={user_auth}>
             {isCreateAccount && (
               <>
                 <label htmlFor="username">{isStudent ? 'Username' : 'Business Name'}</label>
@@ -104,7 +160,8 @@ return (
             {isStudent && (
               <>
                 <label htmlFor="password">Mat Number</label>
-                <input
+                <input 
+                  onChange={(e)=> {setMatNo(e.target.value)}}
                   type="text"
                   placeholder="Enter your Mat Number"
                   required
@@ -151,8 +208,7 @@ return (
               </div>
             )}
 
-            <button
-              onClick={user_auth}
+            <button 
               type="submit"
               className="register-btn dark"
             >

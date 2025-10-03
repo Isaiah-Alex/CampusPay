@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "title": "CampusPay v1.2 Update is Live",
+        "message": "We are excited to inform you that CampusPay v1.2 Update is Live. This update brings enhanced security features, improved user experience, and several bug fixes. Please update your app to enjoy the latest features and improvements. Thank you for being a valued member of the CampusPay community",
+        "date": "2025-09-05"
+    },
+    {
+        "id": 2,
+        "title": "Scheduled Maintenance Notice",
+        "message": "Our system will undergo routine maintenance on Friday, 6th Sept, 2025 (12:00AM - 3:30PM). During this period, transactions may be temporarily unavailable",
+        "date": "2025-09-06"
+    }
+]

@@ -1,47 +1,50 @@
-.transactions{
-    display: flex;
-    justify-content: space-between;
+.transactions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     color: var(--grey-light);
-    .transaction-left{
+    justify-content: space-between;
+    align-items: center;
+}
 
-        margin: 0;
-        padding: 0;
-        h4{
-            margin: 0;
-            padding: 0;
-            font-size: 24px;
-            font-weight: 400;
-        }
-        p{
-            color: var(--grey-middle);
-            font-size: 16px;
-        }
-    }
+.transaction .transaction-left {
+    margin: 0;
+    padding: 0;
+}
 
-    .transaction-right{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        margin-bottom: 18px;
+.transaction-left h4 {
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    font-weight: 400;
+}
 
-        
-        .transaction-right-amount{
-            display: flex;
-            column-gap: 4px;
-            color: var(--orange);
-            align-items: center;
-            &::before{
-                content: '+';
-            }
-            img{
-                height: 18px;
-            }
+.transaction-left p {
+    color: var(--grey-middle);
+    font-size: 16px;
+}
 
-            p{
-                font-size: 24px;
+.transaction-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-self: flex-end;
 
+    margin-bottom: 18px;
+}
 
-            }
-        }
-    }
+.transaction-right-amount {
+    display: flex;
+    column-gap: 4px;
+    color: var(--orange);
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.transaction-right-amount img {
+    height: 18px;
+}
+
+.transaction-right-amount p {
+    font-size: 24px;
 }

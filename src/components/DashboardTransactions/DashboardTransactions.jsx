@@ -2,8 +2,58 @@ import React, { useRef, useState } from 'react'
 import './DashboardTransactions.css';
 import Transactions from './Transactions'
 import transactionDetails from '../../assets/transaction_details.json'
-
 import Footer from '../../components/Footer/Footer'
+import announcements from '../../assets/announcements.json'
+
+
+
+// Component for announcement
+  const AnnouncementListItems = ({announce}) => {
+    const [isSummarized, setIsSumarized] = useState(true);
+    const summaryLength = 90;
+
+    const toggleSummary = () =>{
+      setIsSumarized( prev => !prev)}
+
+      return(
+        <li style={{paddingTop: '10px'}} key={announce.id}>
+          {isSummarized ? (
+            <span>
+              {announce.message.substring(0, summaryLength)}
+              {announce.message.length > summaryLength && (
+                <span 
+                style={{ cursor: 'pointer', color: 'var(--grey-light)' }}
+                onClick={toggleSummary}
+                >
+                  ...see more
+                </span>
+              )}
+            </span>
+
+          ) : (
+            <span>
+              {announce.message}
+              {announce.message.length > summaryLength && (
+                <span 
+                style={{ cursor: 'pointer', color: 'var(--grey-light)' }}
+                onClick={toggleSummary}
+                >
+                  ...see less
+                </span>
+              )}
+            </span>
+          )
+          
+        }
+        </li>
+
+      );
+  }
+
+
+
+
+//Main component
 
 const DashboardTransactions = () => {
 
@@ -25,9 +75,35 @@ const DashboardTransactions = () => {
 
   });
 
+  const [seeMoreTransactionHistory, setSeeMoreTransactionHistory] = useState(5);
+  const isShowMoreRef = useRef(null);
+
+  //to change the more to less and vice versa
+  const handleShowMoreChange = () => {
+    if((filteredTransactions.length - seeMoreTransactionHistory)< 5 && 
+       (filteredTransactions.length - seeMoreTransactionHistory)>= 0){
+        isShowMoreRef.current.textContent = 'less '
+    } else{
+      isShowMoreRef.current.textContent = 'more '
+    }
+  }
+
+//A callback function that changes the state of transaction and calls the ref state change function
+  const handleTransactionHistory = (callback) =>{
+    if (seeMoreTransactionHistory < filteredTransactions.length){
+      setSeeMoreTransactionHistory(prev => prev + 5);
+      callback();
+      
+    } else if (seeMoreTransactionHistory >= filteredTransactions.length){
+      callback();
+      setSeeMoreTransactionHistory(5);
+    }
+
+  }
 
 
-
+  //limit the number of transactions displayed to 5
+  const recentTransaction = filteredTransactions.slice(0, seeMoreTransactionHistory);
 
   return (
     <div className='dashboard-transaction'>
@@ -51,8 +127,8 @@ const DashboardTransactions = () => {
         </div>
 
         <div className="transaction-details">
-        {filteredTransactions.map((txn) => (
-          <Transactions 
+        {recentTransaction.map((txn) => (
+          <Transactions
           key={txn.id}
           transactionAmount={txn.amount.toLocaleString()}
           transactionStatus={txn.status === 'failed' ? <span style={{color: '#DD2F27'}}>{txn.status}</span> : txn.status === 'pending' ? <span style={{color: '#FEC51D'}}>{txn.status}</span> : <span style={{color: 'var(--orange)'}}>{txn.status}</span>} 
@@ -60,27 +136,39 @@ const DashboardTransactions = () => {
           transactionMonth={txn.month}
           transactionDay={txn.day}
           transactionTime={txn.time}
-          
           transactionName={txn.type === "Withdraw" || txn.type === "Transfer" ? txn.name : ""}
+          
 
-          preposition={txn.type === "Transfer" ? "to" : txn.type === "Withdraw" ? "from" : "" }
+          preposition={txn.type === "Transfer" ? "to" : txn.type === "Withdraw" ? "" : "" }
           />
         )
         )} 
+        <p style={{textAlign: 'center'
+                  , paddingTop: '20px',
+                  color: 'var(--grey-middle)',
+                  cursor: 'pointer'
+                  }} 
+                  onClick={()=> {handleTransactionHistory(handleShowMoreChange)}} 
+                  
+                  >
+                  ...See <span ref={isShowMoreRef}>more </span>transactions</p>
         </div>
 
         <div className="annoucement">
           <h4>Annoucement</h4>
           <ul>
-          <li>We are excited to inform you that CampusPay v1.2 Update is Live</li>
-
-          <li>Our system will undergo routine maintenance on friday, 6th sept, 2025 (12:00AM - 3:300PM). During this period, transactions may temporarily unavvaliable</li>
+            {announcements.map((announce) => (
+              <AnnouncementListItems
+              key={announce.id}
+              announce = {announce}
+              />
+            ))}
           </ul>
         </div>
         <Footer />
 
     </div>
   )
-}
+};
 
 export default DashboardTransactions

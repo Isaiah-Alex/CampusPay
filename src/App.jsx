@@ -7,12 +7,11 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import { onAuthStateChanged } from 'firebase/auth'; 
 import { auth } from './firebase';
 import { ToastContainer, toast } from 'react-toastify';
+import { AuthProvider, useAuth } from './Contexts/AuthContex';
 
 const NotFound = () => {
   return<h1 style={{display:'grid', placeItems: 'center', height:'100vh'}} >404 -Page Not found</h1>;
 }
-
-
 const App = () => {
 
   // const [loading, setLoading] = useState(true);
@@ -33,15 +32,17 @@ const App = () => {
 
   return (
     <div>
-      <ToastContainer theme='dark'/>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/connect-wallet' element={<ConnectWallet/> } />
-          <Route path='/dashboard' element={<Dashboard/> } />
-          <Route  path='*' element={<NotFound/>} />
-        </Routes>
-      <ToastContainer />
+      <AuthProvider>
+        <ToastContainer theme='dark'/>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/connect-wallet' element={<ConnectWallet/> } />
+            <Route path='/dashboard' element={<Dashboard/> } />
+            <Route  path='*' element={<NotFound/>} />
+          </Routes>
+        <ToastContainer />
+      </AuthProvider>
       
     </div>
   )

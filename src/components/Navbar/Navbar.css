@@ -43,9 +43,14 @@
     transition: border-bottom 0.5s ease;
 }
 
-.underline:hover{
+.nav-active {
     border-bottom: 1.5px solid var(--orange);
     color: var(--orange);
+}
+
+.underline:hover{
+    border-bottom: 1.5px solid var(--grey-white);
+    color: var(--grey-white);
     /* transition: 0.2s; */
 }
 

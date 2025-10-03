@@ -1,21 +1,37 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import './Dashboard.css'
 import DashboardSidebar from '../../components/DashboardSidebar/DashboardSidebar'
 import HeroDashboard from '../../components/HeroDashboard/HeroDashboard'
 import DashboardTransactions from '../../components/DashboardTransactions/DashboardTransactions'
+import { useAuth } from '../../Contexts/AuthContex'
 
 
 const Dashboard = () => {
+
+
+
+  const scrollRef = useRef(null);
+  const scrollToSection = () =>{
+    scrollRef.current.scrollIntoView({behavior: "smooth"});
+    console.log(scrollRef)
+  }
+
+  useEffect(()=>{
+    if (scrollRef.current){
+      console.log('ref is avaliable')
+    }
+  },[]);
+
   return (
     <div className = 'dashboard'>
       <div className="dashbord-sidebar-container">
-         <DashboardSidebar />
+         <DashboardSidebar/>
       </div>
       <div className="dashboard-hero-container">
-        <HeroDashboard />
+        <HeroDashboard scrollFunc = {scrollToSection} />
       </div>
       <div className="dashboard-transaction">
-        <DashboardTransactions />
+        <DashboardTransactions ref={scrollRef}/>
       </div>
 
     </div>

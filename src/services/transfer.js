@@ -1,19 +1,31 @@
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { db } from "../firebase";
+// src/services/transfer.js
+import { db } from '../firebase';
+import { collection, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
 
-export async function transfer(senderUid, receiverUid, amount) {
-  const senderRef = doc(db, "user", senderUid);
-  const receiverRef = doc(db, "user", receiverUid);
+export const transfer = async (senderAccountNo, receiverAccountNo, amount) => {
+  if (!senderAccountNo || !receiverAccountNo) throw new Error('Both sender and receiver account numbers are required');
+  if (amount <= 0) throw new Error('Amount must be greater than 0');
+  if (senderAccountNo === receiverAccountNo) throw new Error("You can't transfer to your own account");
 
-  const senderSnap = await getDoc(senderRef);
-  const receiverSnap = await getDoc(receiverRef);
+  // Get sender
+  const senderQuery = query(collection(db, 'user'), where('accountNo', '==', senderAccountNo));
+  const senderSnap = await getDocs(senderQuery);
+  if (senderSnap.empty) throw new Error('Sender account not found');
+  const senderDoc = senderSnap.docs[0];
+  const senderData = senderDoc.data();
 
-  if (!senderSnap.exists() || !receiverSnap.exists())
-    throw new Error("Sender or receiver not found");
+  if (senderData.balance < amount) throw new Error('Insufficient balance');
 
-  const senderBalance = senderSnap.data().balance || 0;
-  if (senderBalance < amount) throw new Error("Insufficient funds");
+  // Get receiver
+  const receiverQuery = query(collection(db, 'user'), where('accountNo', '==', receiverAccountNo));
+  const receiverSnap = await getDocs(receiverQuery);
+  if (receiverSnap.empty) throw new Error('Receiver account not found');
+  const receiverDoc = receiverSnap.docs[0];
+  const receiverData = receiverDoc.data();
 
-  await updateDoc(senderRef, { balance: senderBalance - amount });
-  await updateDoc(receiverRef, { balance: (receiverSnap.data().balance || 0) + amount });
-}
+  // Update balances
+  await updateDoc(doc(db, 'user', senderDoc.id), { balance: senderData.balance - amount });
+  await updateDoc(doc(db, 'user', receiverDoc.id), { balance: receiverData.balance + amount });
+
+  return true;
+};
