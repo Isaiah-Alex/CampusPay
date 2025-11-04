@@ -12,6 +12,7 @@ import { withdraw } from '../../services/withdraw';
 import { deposit } from '../../services/deposit';
 import { transfer } from '../../services/transfer';
 import { useAuth } from '../../Contexts/AuthContex';
+import { Link } from 'react-router-dom';
 
 const HeroDashboard = ({ scrollFunc }) => {
   const [name, setName] = useState('');
@@ -152,7 +153,9 @@ const handleTransfer = async () => {
         <button className="btn dark" onClick={handleTransfer}>
           Send Money
         </button>
-        <button className="btn dark">Receive Money</button>
+        <Link to="/deposit">
+          <button className="btn dark">Receive Money</button>
+        </Link>
         <button className="btn dark" onClick={handleWithdraw}>
           Withdraw
         </button>
