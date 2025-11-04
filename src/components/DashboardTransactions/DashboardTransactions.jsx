@@ -122,7 +122,7 @@ const DashboardTransactions = () => {
           <option value="all">All Status</option>
           <option value="pending"> pending</option>
           <option value="successful">successful</option>
-          <option value="failed">faled</option>
+          <option value="failed">falied</option>
         </select>
         </div>
 
