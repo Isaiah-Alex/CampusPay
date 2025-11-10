@@ -2,7 +2,7 @@ import React from "react";
 import Lottie from "lottie-react";
 import loading from "../assets/loadingAnimation.json";
 
-const Loader = () => {
+const Loader = ({index}) => {
   return (
     <div style={{
       position: "fixed",
@@ -14,7 +14,7 @@ const Loader = () => {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      zIndex: 9999
+      zIndex: index
     }}>
       <div style={{ width: 150 }}>
         <Lottie animationData={loading} loop={true} />

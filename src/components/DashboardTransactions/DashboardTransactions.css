@@ -2,30 +2,29 @@
     background: var(--dark-gradient);
     color: var(--grey-light);
     margin-top: 60px;
+}
 
-    hr{
-        max-width: 90%;
-        margin: 15px auto 20px auto;
-        border: 1px solid var(--grey-placeholder)
-        
-    }
+.dashboard-transaction hr{
+    max-width: 90%;
+    margin: 15px auto 20px auto;
+    border: 1px solid var(--grey-placeholder)   
+}
 
-    h4{
-        font-weight: 400;
-        font-size: 24px;
-        padding-left: 118px;
+.dashboard-transaction h4{
+    font-weight: 400;
+    font-size: 24px;
+    padding-left: 118px;
+}
 
-    }
+.dashboard-transaction .categories-status{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 20px auto;
 
-    .categories-status{
-        width: 70%;
-        display: flex;
-        justify-content: space-between;
-        margin: 0 auto 20px auto;
+}
 
-    }
-
-    select{
+.dashboard-transaction .categories-status select{
         padding: 8px 40px;
         font-size: 16px;
         background: #0F0F0F url("../../assets/Polygon-icon.svg") no-repeat right 10px center;
@@ -36,55 +35,78 @@
         appearance: none;            /* Removes default arrow (modern browsers) */
         -webkit-appearance: none;    /* Safari / Chrome */
         -moz-appearance: none;       /* Firefox */
+}
 
-        &:-ms-expand {
+.dashboard-transaction .categories-status select:-ms-expand {
             display: none;}  /* Removes default arrow (IE 10+) */
 
-        &:hover{
-            cursor: pointer;
-        }
+.dashboard-transaction .categories-status select:hover{
+    cursor: pointer;
+}
 
-        option{
-            outline: none;
-            background: var(--dark-gradient);
-            border: none;
+.dashboard-transaction .categories-status option{
+    outline: none;
+    background: var(--dark-gradient);
+    border: none;
+}
 
-            &:focus{
-                outline: none;
-            }
-        }
-    }
+.dashboard-transaction .categories-status option:focus{
+    outline: none;
+}
 
-    .transaction-details{
-        width: 70%;
-        margin: 0 auto;
-    }
+.dashboard-transaction .transaction-details{
+    width: 70%;
+    margin: 0 auto;
+}
 
-    .annoucement{
-        width: 60%;
-        text-align: left;
-        margin: 0 auto;
-        h4{
-            text-align: center;
-            font-size: 24px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
+.dashboard-transaction .annoucement{
+    width: 60%;
+    text-align: left;
+    margin: 0 auto;
+}
+.dashboard-transaction .annoucement h4{
+    text-align: center;
+    font-size: 24px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
 
-        li{
-            color: var(--grey-middle);
-
-            &::before{
-                content: '- ';
-            }
-        }
-    }
+.dashboard-transaction .annoucement li{
+    color: var(--grey-middle);
+}
+.dashboard-transaction .annoucement li::before{
+    content: '- ';
 }
 
 .dashboard-transaction select:focus{
-    &:focus{
-            outline: none !important;
-            box-shadow: none !important;
-            border: none !important
-        }
+    outline: none;
+    box-shadow: none;
+    border: none;
+
+}
+
+
+@media (max-width: 1024px) {
+    .dashboard-transaction{
+        margin-top: 30px;
+        padding-left: 30px;
+    }
+}
+
+@media (max-width: 802px) {
+    .dashboard-transaction{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .transactions{
+        margin: 4px 0;
+    }
+
+    .transaction-details{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .dashboard-transaction{
+        margin-right: -40px;
+    }
 }

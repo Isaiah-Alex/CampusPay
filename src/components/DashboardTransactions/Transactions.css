@@ -4,6 +4,7 @@
     color: var(--grey-light);
     justify-content: space-between;
     align-items: center;
+    margin: 10px 0;
 }
 
 .transaction .transaction-left {
@@ -47,4 +48,22 @@
 
 .transaction-right-amount p {
     font-size: 24px;
+}
+
+@media (max-width: 802px) {
+    .transaction-left h4{
+        font-size: 20px;
+    }
+    .transaction-left{
+        align-self: center;
+    }
+    .transaction-right p{
+        font-size: 20px;
+    }
+    .transaction-right{
+        margin: auto 0;
+    }
+    .transaction-right span{
+        font-size: 16px;
+    }
 }

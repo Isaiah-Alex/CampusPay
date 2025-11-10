@@ -7,3 +7,10 @@ h2{
     margin-top: 60px;
     margin-bottom: 30px;
 }
+
+
+@media (max-width: 600px){
+    h2{
+        font-size: 35px;
+    }
+}

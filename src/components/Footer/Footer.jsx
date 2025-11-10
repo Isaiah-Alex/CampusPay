@@ -4,7 +4,7 @@ import logo from '../../assets/logo-orange.svg'
 
 const Footer = () => {
   return (
-    <div className='footer' >
+    <footer className='footer' >
       <div className="footer-list">
         <div className="footer-left">
           <img src={logo} alt="footer-logo" />
@@ -22,7 +22,7 @@ const Footer = () => {
       </div>
       <p className='footer-reserve'>&copy; CampusPay 2025. All rights reserved</p>
 
-    </div>
+    </footer>
   )
 }
 

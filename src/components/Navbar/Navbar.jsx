@@ -34,7 +34,7 @@ const Navbar = () => {
         <img src={gradient_logo} alt="CampusPay Logo" />
       <p>CampusPay</p>
       </div>
-      <div className="navbar-right">
+      <nav className="navbar-right">
         <ul>
         {navItems.map((item, index)=>{
           return (<li key={index}
@@ -52,12 +52,12 @@ const Navbar = () => {
       </ul>
       <img src={hamburger} alt="Hamburger Menu Icon" onClick={()=>{toggleMenu()}} className='hamburger'/>
 
-      </div>
+      </nav>
       <ul className='hamburger-menu hide' ref={menuRef}>
         <li>Features</li>
         <li>Support</li>
         <li>Connect Wallet</li>
-        <li>Login</li>
+        <li><Link   to={'/login'}>Login</Link></li>
       </ul>
       
     </div>

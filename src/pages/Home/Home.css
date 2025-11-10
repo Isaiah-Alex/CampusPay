@@ -16,7 +16,7 @@
 
 .hero-container{
     background: var(--dark-gradient);
-    margin-top: 80px;
+    /* margin-top: 80px; */
 }
 
 .navbar-container{
@@ -24,7 +24,8 @@
     width: 100%;
     z-index: 3;
     background: #191919e6;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
+    margin-top: -20px;
 }
 
 /*-------------media queries*---------*/

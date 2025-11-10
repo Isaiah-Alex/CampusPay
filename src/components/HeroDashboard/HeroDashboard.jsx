@@ -85,101 +85,133 @@ const handleWithdraw = async () => {
   // Transfer
 const handleTransfer = async () => {
   numberOfClickedRef.current++;
+  
   if (numberOfClickedRef.current < 2) {
     setIsSendBtnClicked(true);
   } else {
     try {
-      await transfer(accountNo, receiverAccountNo, Number(amount)); // sender and receiver are account numbers
-      alert(`Successfully sent ₦${Number(amount).toLocaleString()} to ${receiverAccountNo}`);
+      const transferAmount = Number(amount);
+      const receiver = receiverAccountNo;
+      
+      // Validate inputs
+      if (!receiver) {
+        alert('Please enter receiver account number');
+        return;
+      }
+      if (!transferAmount || transferAmount <= 0) {
+        alert('Please enter a valid amount');
+        return;
+      }
+      
+      // Perform transfer
+      const result = await transfer(accountNo, receiver, transferAmount);
+      
+      // Show success with receiver name
+      const message = `Successfully sent ₦${transferAmount.toLocaleString()} to ${result.receiverName} (${receiver})`;
+      console.log(message);
+      alert(message);
+      
+      // Reset form
       setAmount('');
       setReceiverAccountNo('');
+      setIsSendBtnClicked(false);
+      numberOfClickedRef.current = 0;
+      
+      // Update balance display
+      setBalance(result.newBalance); // if you have this state
+      
     } catch (err) {
-      alert(err.message);
+      console.error('Transfer error:', err);
+      alert(`Transfer failed: ${err.message}`);
+      
+      // Reset counter on error
+      numberOfClickedRef.current = 0;
+      setIsSendBtnClicked(false);
     }
   }
 }
-
   return (
-    <div className="hero-dashboard">
-      <h2>
-        Welcome, <span>{name || ''}</span>
-      </h2>
-      <p className="account-number">
-        Acc No: <span>{accountNo}</span>
-      </p>
-
-      <div className="balance-display">
-        <div className="left-balance-display">
-          <div className="avaliable-balance">
-            <img src={security_icon} alt="security icon" />
-            <p>Available Balance</p>
-            <img
-              src={eye_icon}
-              alt="eye icon"
-              onClick={handleBalanceDisplay}
-              ref={openEyeRef}
-            />
-            <img
-              src={closed_eye_icon}
-              alt="closed eye icon"
-              onClick={handleBalanceDisplay}
-              ref={closedEyeRef}
-            />
+    <>
+      <div className="hero-dashboard">
+        <div className="hero-dashboard__items">
+          <div className='hero-welcome__header'>
+            <h2>
+              Welcome, <span>{name || 'Isaiah Alex'}</span>
+            </h2>
+            <p className="account-number">
+              Acc No: <span>{accountNo || 'PSC2105296'}</span>
+            </p>
           </div>
+          <div className="hero-welcome__cards">
+            <div className="balance-display">
+              <div className="avaliable-balance">
+                <img src={security_icon} alt="security icon" />
+                <p>Available Balance</p>
+                <img
+                  src={eye_icon}
+                  alt="eye icon"
+                  onClick={handleBalanceDisplay}
+                  ref={openEyeRef}
+                />
+                <img
+                  src={closed_eye_icon}
+                  alt="closed eye icon"
+                  onClick={handleBalanceDisplay}
+                  ref={closedEyeRef}
+                />
+              </div>
 
-          <div className="balance">
-            <img src={naira_icon} alt="naira icon" />
-            {isBalanceDisplaying ? (
-              <h1>{balance.toLocaleString()}</h1>
-            ) : (
-              <h1>{balance.toString().split('').map(() => '*').join('')}</h1>
+              <div className="balance">
+                <img src={naira_icon} alt="naira icon" />
+                {isBalanceDisplaying ? (
+                  <h1>{balance.toLocaleString()}</h1>
+                ) : (
+                  <h1>{balance.toString().split('').map(() => '*').join('')}</h1>
+                )}
+              </div>
+              <div className="transaction-history" onClick={scrollFunc}>
+                <p>Transaction History</p>
+                <img src={right_arrow_icon} alt="right arrow icon" />
+              </div>
+
+              <button className="btn dark" onClick={handleDeposit}>
+                <span>+</span> Add Money
+              </button>
+            </div>
+
+            <div className="send-receive-withdraw">
+              <button className="btn dark" onClick={handleTransfer}>
+                Send
+              </button>
+              
+                <button className="btn dark"><Link style={{color: 'var(--grey-black)'}} to="/deposit">Receive</Link></button>
+
+              <button className="btn dark" onClick={handleWithdraw}>
+                Withdraw
+              </button>
+            </div>
+
+            {isSendBtnClicked && (
+              <div className="test-inputs">
+                <input
+                  type="number"
+                  placeholder="Amount"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="Receiver Account No"
+                  value={receiverAccountNo}
+                  onChange={(e) => setReceiverAccountNo(e.target.value)}
+                />
+              </div>
             )}
           </div>
-        </div>
-
-        <div className="right-balance-display">
-          <div className="transaction-history" onClick={scrollFunc}>
-            <p>Transaction History</p>
-            <img src={right_arrow_icon} alt="right arrow icon" />
-          </div>
-
-          <button className="btn dark" onClick={handleDeposit}>
-            <span>+</span> Add Money
-          </button>
+          <img className="dashboard-texture" src={texture} alt=""/>
         </div>
       </div>
-
-      <div className="send-receive-withdraw">
-        <button className="btn dark" onClick={handleTransfer}>
-          Send Money
-        </button>
-        <Link to="/deposit">
-          <button className="btn dark">Receive Money</button>
-        </Link>
-        <button className="btn dark" onClick={handleWithdraw}>
-          Withdraw
-        </button>
-      </div>
-
-      {isSendBtnClicked && (
-        <div className="test-inputs">
-          <input
-            type="number"
-            placeholder="Amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Receiver Account No"
-            value={receiverAccountNo}
-            onChange={(e) => setReceiverAccountNo(e.target.value)}
-/>
-        </div>
-      )}
-
-      <img className="dashboard-texture" src={texture} alt="" />
-    </div>
+    </>
   );
 };
 

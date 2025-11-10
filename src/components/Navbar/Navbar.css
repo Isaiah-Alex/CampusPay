@@ -38,6 +38,15 @@
     padding-bottom: 4px;
 
 }
+
+.hamburger-menu a{
+    color: var(--grey-white);
+
+    &:hover{
+        color: var(--orange);
+    }
+}
+
 .underline{
     border-bottom: 1.5px solid transparent;
     transition: border-bottom 0.5s ease;
@@ -135,6 +144,9 @@
     .hamburger{
         display: block;
     }
+    .navbar{
+        padding-top: 0;
+    }
 }
 
 @media (max-width: 600px) {
@@ -143,7 +155,7 @@
     }
     .navbar-left{
         gap: 10px;
-        font-size: 25px;
+        font-size: 20px;
     }
     .navbar-left img{
         width: 38px;

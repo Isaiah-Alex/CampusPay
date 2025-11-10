@@ -1,190 +1,385 @@
+.hero-dashboard__items{
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* margin-right: ; */
+}
+
 .hero-dashboard{
     background: var(--dark-gradient);
     z-index: 1;
     position: relative;
-    padding: 30px 66px;
+    /* padding: 30px 66px; */
     display: flex;
     flex-direction: column;
     overflow: hidden;
     align-items: center;
+    width: 100%;
+    height: 100%;
+    /* border: 2px solid red; */
+}
 
-    h2{
+.hero-welcome__header{
+    text-align: center;
+    margin: 0 auto;
+    /* margin-left: 6em; */
+}
+
+.hero-dashboard h2{
         font-size: 50px;
         font-weight: 400;
         color: var(--grey-light);
         font-style: italic;
         /* margin-bottom: 10px; */
+}
 
-        span{
-            color: var(--orange);
-        }
-        
+.hero-dashboard h2 span{
+    color: var(--orange);
+}
 
+.account-number{
+    font-size: 20px;
+    color: var(--grey-placeholder);
+    margin-top: -25px;
+    margin-bottom: 30px;
+}
+    
+.account-number span{
+    color: var(--grey-middle);
+    font-weight: 500;
+    font-size: 22px;
     }
 
-    .account-number{
-        font-size: 20px;
-        color: var(--grey-placeholder);
-        margin-top: -25px;
-        margin-bottom: 30px;
-        span{
-            color: var(--grey-middle);
-            font-weight: 500;
-            font-size: 22px;
-        }
-    }
+.test-inputs {
+    display: flex;
+    justify-content: center;
+}
+.test-inputs input{
+    text-align: center;
+    padding: 10px;
+    margin: 5px 10px;
+    height: 50px;
+    border: 1.5px solid var(--grey-dark);
+    border-radius: 6px;
+    background-color: transparent;
+    padding-left: 16px;
+    font-weight: 100;
+    color: var(--grey-light);
+    font-size: 16px;
+}
 
-    .test-inputs input{
-        padding: 10px;
-        margin: 0 10px;
-        height: 50px;
-        border: 1.5px solid var(--grey-dark);
-        border-radius: 6px;
-        background-color: transparent;
-        padding-left: 16px;
-        font-weight: 100;
-        color: var(--grey-light);
-        font-size: 16px;
-
-        &:focus{
-            outline: none;
-            border: 1.5px solid var(--orange);
-        }
-        &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{
-            -webkit-appearance: none;
-            margin: 0;
-        }
+.test-inputs input:focus{
+    outline: none;
+    border: 1.5px solid var(--orange);
     }
+.test-inputs input::-webkit-outer-spin-button, .test-inputs input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 /* ------balance card ------ */
+.balance-display{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    background: var(--grey-black);
+    border-radius: 35px;
+    padding: 40px 80px;
+}
 
 
-    .balance-display{
-        display: flex;
-        justify-content: space-between;
-        width: 870px;
-        height: 250px;
-        background: var(--grey-black);
-        border-radius: 35px;
-        padding: 40px 80px;
+/* .left-balance-display{
+    display: flex;
+    flex-direction: column;
+    row-gap: 28px;
+    justify-content: space-between;
+    padding: 10px 0;
+    margin-right: 12em;
+    overflow-y: hidden;
+ } */
 
-        .left-balance-display{
-            display: flex;
-            flex-direction: column;
-            row-gap: 28px;
-            justify-content: space-between;
-            padding: 10px 0;
+.avaliable-balance{
+    grid-column: 1/2;
+    grid-row: 1/2;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    overflow: hidden;
+    align-self: flex-start;
+    /* background-color: red; */
+}
 
-            .avaliable-balance{
-                display: flex;
-                align-items: center;
-                column-gap: 10px;
-                overflow: hidden;
+.avaliable-balance img:nth-last-of-type(3){
+    height: 26px;
+}
 
-                img:nth-last-of-type(3){
-                    height: 26px;
-                }
-                img:nth-last-of-type(2){
-                    cursor: pointer;
-                }
-                img:nth-last-of-type(1){
-                    cursor: pointer;
-                    display: none;
-                }
+.avaliable-balance img:nth-last-of-type(2){
+    cursor: pointer;
+}
 
-                p{
-                    font-size: 18px;
-                    color: var(--grey-middle);
-                }
+.avaliable-balance img:nth-last-of-type(1){
+    cursor: pointer;
+    display: none;
+}
 
-            }
+.avaliable-balance p{
+    font-size: 18px;
+    color: var(--grey-middle);
+}
 
-            .balance{
-                display: flex;
-                align-items: center;
+.balance{
+    grid-column: 1/2;
+    grid-row: 2/3;
+    display: flex;
+    align-items: center;
+    overflow-y: hidden;
+    align-self: flex-start;
+    justify-self: flex-start;
+}
 
-                h1{
-                    font-size: 60px;
-                    font-weight: 500;
-                    color: var(--grey-light);
-                }
-            }
-        }
+.balance h1{
+    font-size: 60px;
+    font-weight: 500;
+    color: var(--grey-light);
+}
 
-        .right-balance-display{
-            display: flex;
-            flex-direction: column;
-            row-gap: 28px;
-            justify-content: space-between;
-            align-items: flex-end;
-            padding: 10px 0;
-            /* background-color: red; */
+/* .right-balance-display{
+    display: flex;
+    flex-direction: column;
+    row-gap: 28px;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 10px 0;
+} */
 
-            button{
-                width: 200px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                column-gap: 10px;
-                border-radius: 70px;
-                font-size: 16px;
+.balance-display button{
+    justify-self: flex-end;
+    grid-column: 2/3;
+    grid-row: 2/-1;
+    align-self: center;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    border-radius: 70px;
+    font-size: 16px;
+    overflow-y: hidden;
+}
 
-                span{
-                    font-size: 24px;
-                }
+.balance-display button span{
+    font-size: 24px;
+}
 
-                &:hover{
-                    background-color: var(--orange-hover);
-                }
-            }
+.balance-display button:hover{
+    background-color: var(--orange-hover);
+}
 
-            .transaction-history{
-                display: flex;
-                align-items: center;
-                column-gap: 10px;
-                cursor: pointer;
+.transaction-history{
+    justify-self: flex-end;
+    align-self: flex-start;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    cursor: pointer;
+    overflow-y: hidden;
+}
 
-                p{
-                    color: var(--grey-middle);
-                    font-size: 18px;
-                }
-            }
-        }
-    }
+.transaction-history p{
+    color: var(--grey-middle);
+    font-size: 18px;
+}
 
-    /* ---end of balance card ---  */
+/* ---end of balance card ---  */
 
-    .send-receive-withdraw{
-        border-radius: 30px;
-        background: var(--grey-black);
-        margin-top: 30px;
-        padding: 30px 64px;
-        width: 870px;
-        display: flex;
-        justify-content: center;
-        column-gap: 40px;
-        margin-bottom: 20px;
+.send-receive-withdraw{
+    border-radius: 30px;
+    background: var(--grey-black);
+    margin-top: 30px;
+    padding: 30px 35px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    column-gap: 40px;
+    margin-bottom: 20px;
+}
         
-        button{
-            border-radius: 15px;
-            width: 221px;
-            height: 66px;
-            font-size: 16px;
+.send-receive-withdraw button{
+    border-radius: 15px;
+    width: 221px;
+    height: 66px;
+    font-size: 16px;
+}
+.send-receive-withdraw button :hover{
+    background-color: var(--orange-hover);
+}
 
-            &:hover{
-                background-color: var(--orange-hover);
-            }
-        }
+.hero-dashboard .dashboard-texture{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    opacity: 40%;
+}
+
+
+
+
+@media (max-width: 1232px){
+    .send-receive-withdraw{
+        column-gap: 20px;
+        padding: 20px 25px;
     }
-    .dashboard-texture{
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: -1;
-        opacity: 40%;
+    .send-receive-withdraw button{
+        border-radius: 15px;
+        width: 200px;
+        height: 66px;
     }
+}
 
-
-
+@media (max-width: 1024px){
+    .hero-dashboard__items{
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        margin-left: 15px;
+    }
+    .hero-welcome__header{
+        grid-column: 2/-1;
+    }
+    .hero-welcome__cards{
+        grid-column: 2/-1;
+    }
 
 }
+
+@media (max-width: 802px){
+    .hero-dashboard{
+        padding: 0;
+    }
+    .hero-dashboard__items{
+        width: 80%;
+        margin-left: calc(100%/23);
+    }
+    .hero-welcome__cards{
+        width: 100%;
+    }
+    .balance-display{
+        padding: 20px 25px;
+        border-radius: 25px;
+        /* max-width: 400px; */
+        /* margin: 0 55px 0 80px; */
+    }
+    .balance-display button{
+        width: auto;
+        height: 50px;
+        padding: 5px 16px;
+    }
+    .transaction-history p{
+        font-size: 16px;
+    }
+    .transaction-history{
+        gap: 3px;
+        align-items: center;
+    }
+    .transaction-history img{
+        padding-bottom: 3px;
+    }
+    .avaliable-balance p{
+        font-size: 16px;
+    }
+    .avaliable-balance img:nth-of-type(1){
+        height: 20px;
+    }
+    .avaliable-balance img:nth-of-type(2){
+        height: 24px;
+    }
+    .avaliable-balance img:nth-of-type(3){
+        height: 24px;
+    }
+    .avaliable-balance{
+        gap: 5px;
+    }
+    .send-receive-withdraw{
+        padding: 20px 25px;
+        margin-top: 15px;
+    }
+    .send-receive-withdraw button{
+        padding: 10px 16px;
+        border-radius: 15px;
+        width: calc(100%/3.3);
+        height: auto;
+    }
+    .send-receive-withdraw{
+        padding: 10px 10px;
+        border-radius: 25px;
+        width: auto;
+        height: 70px;
+        gap: 14px;
+        margin-bottom: 10px;
+    }
+    .balance-display h1{
+        font-size: 40px;
+        /* padding-right: 20px; */
+    }
+    .balance-display .balance img{
+        width: 40px;
+    }
+    .hero-welcome__header h2{
+        font-size: 35px;
+    }
+    .hero-welcome__header p{
+        font-size: 16px;
+    }
+    .hero-welcome__header p span{
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 653px) {
+    .test-inputs{
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 570px){
+    .hero-dashboard__items{
+        width: 80%;
+        margin-left: calc(80%/8);
+    }
+    .avaliable-balance p, .transaction-history p{
+        font-size: 12px;
+    }
+    .avaliable-balance img:nth-of-type(1){
+        width: 12px;
+    }
+    .avaliable-balance img:nth-of-type(2){
+        width: 16px;
+    }
+    .avaliable-balance img:nth-of-type(3){
+        width: 16px;
+    }
+    .transaction-history img{
+        width: 15px;
+    }
+    .transaction-history{
+        margin-top: 5px;
+    }
+    .send-receive-withdraw{
+        height: 65px;
+    }
+    .send-receive-withdraw button{
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .balance-display button{
+        padding: 8px 12px;
+        width: 120px;
+        height: 40px;
+        font-size: 12px;
+    }
+}
+

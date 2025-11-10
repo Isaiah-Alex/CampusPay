@@ -90,7 +90,7 @@ const user_auth = async (e) => {
 
     }
 
-  // ✅ Fetch account number from Firestore
+  //Fetch account number from Firestore
   const user = auth.currentUser;
   if (user) {
     const snap = await getDoc(doc(db, "user", user.uid));
@@ -108,9 +108,9 @@ const user_auth = async (e) => {
 
 
 return (
-  <div className="login-bg">
+  <div className="login-bg" onClick={()=>{console.log('hello')}}>
     {/* The loading overlay from lottie */}
-    {loading && <Loader />}
+    {loading && <Loader index={'9'}/>}
 
     <div className="login">
       <div className="login-logo">
@@ -250,6 +250,8 @@ return (
     <img src={vector} alt="" className="left-vector" />
   </div>
 );
+
+
 }
 
 export default Login

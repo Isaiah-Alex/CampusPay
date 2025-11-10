@@ -39,8 +39,8 @@ const registerStudent = async (name, matNo, password) => {
       name,
       email: fakeEmail,
       role: "student",
-      accountNo: matNo,   // ✅ account number = mat number
-      balance: 1000000000,
+      accountNo: matNo,   
+      balance: 0,
       createdAt: new Date()
     });
   } catch (error) {
@@ -67,7 +67,7 @@ const registerVendor = async (name, email, password) => {
       name,
       email,
       role: "vendor",
-      accountNo,  // ✅ save generated account number
+      accountNo, 
       balance: 0,
       createdAt: new Date()
     });

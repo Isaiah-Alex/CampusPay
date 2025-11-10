@@ -1,9 +1,10 @@
 .packages{
     display: flex;
+    flex-wrap: wrap;
     gap: 70px;
     justify-content: center;
     align-items: center;
-    max-width: 1000px;   /* control total width */
+    max-width: 1000px;   
     margin: 0 auto;
 }
 
@@ -61,7 +62,7 @@
     color: var(--grey-light);
     font-size: 18px;
     line-height: 1.6;
-    font-weight: 200;
+    font-weight: 400;
 }
 .items ul li::before{
     content: '•'; /* Unicode for a bullet point */
@@ -103,3 +104,9 @@
 }
 
  }
+
+@media (max-width: 730px){
+    .for{
+        margin-top: 0;
+    }
+}
