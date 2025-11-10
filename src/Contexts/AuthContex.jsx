@@ -3,7 +3,10 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 
-const AuthContext = createContext(null);
+const AuthContext = createContext({
+  accountNo: 0,
+  setAccountNo: () => {},
+});
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -34,8 +37,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={contextValue}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };

@@ -110,3 +110,15 @@
         margin-right: -40px;
     }
 }
+
+@media (max-width: 474px) {
+    .dashboard-transaction h4{
+        font-size: 20px;
+    }
+    .dashboard-transaction .categories-status select{
+        padding: 6px 25px;
+        font-size: 14px;
+        width: auto;
+        /* border: 2px solid red; */
+    }
+}

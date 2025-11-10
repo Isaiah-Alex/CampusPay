@@ -67,3 +67,24 @@
         font-size: 16px;
     }
 }
+@media (max-width: 467px) {
+    .transactions .transaction-left p{
+        font-size: 11px;
+    }
+    .transactions .transaction-left h4{
+        font-size: 16px;
+    }
+    .transactions .transaction-right p{
+        font-size: 18px;
+    }
+    .transactions .transaction-right span{
+        font-size: 11px;
+    }
+    .transactions .transaction-right img{
+        height: 14px;
+    }
+    .transactions {
+        row-gap: 1px;
+        margin: 0 10px;
+    }
+}

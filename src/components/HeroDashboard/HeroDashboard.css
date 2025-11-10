@@ -239,6 +239,9 @@
         width: 200px;
         height: 66px;
     }
+    .balance-display{
+        padding: 30px 50px;
+    }
 }
 
 @media (max-width: 1024px){
@@ -343,6 +346,24 @@
     .test-inputs{
         flex-direction: column;
     }
+    .balance-display .transaction-history p, .avaliable-balance p{
+        font-size: 14px;
+    }
+    .avaliable-balance img:nth-of-type(1){
+        width: 13px;
+    }
+    .avaliable-balance img:nth-of-type(2){
+        width: 18px;
+    }
+    .avaliable-balance img:nth-of-type(3){
+        width: 18px;
+    }
+    .balance-display button{
+        padding: 8px 12px;
+        width: 150px;
+        height: 45px;
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 570px){
@@ -380,6 +401,47 @@
         width: 120px;
         height: 40px;
         font-size: 12px;
+    }
+}
+
+@media (max-width:488px){
+    .hero-dashboard__items{
+        width: 85%;
+        margin-left: 50px;
+    }
+    .balance-display .balance h1{
+        font-size: 30px;
+    }
+    .balance-display .balance img{
+        width: 30px;
+    }
+    .balance-display .avaliable-balance p, .balance-display .transaction-history p{
+        font-size: 10px;
+    }
+    .balance-display .transaction-history{
+        margin-top: 3px;
+    }
+    .balance-display .avaliable-balance img:nth-of-type(1){
+        width: 10px;
+    }
+    .balance-display .avaliable-balance img:nth-of-type(2){
+        width: 14px;
+    }
+    .balance-display .avaliable-balance img:nth-of-type(3){
+        width: 14px;
+    }
+    .balance-display button{
+        padding: 6px 10px;
+        width: 100px;
+        height: 35px;
+        font-size: 10px;
+    }
+    .send-receive-withdraw button{
+        font-size: 13px;
+
+    }
+    .hero-welcome__header .account-number p{
+        margin-bottom: 10px;
     }
 }
 
